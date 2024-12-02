@@ -9,6 +9,9 @@ public:
 	Nurse(std::string, std::string, std::string, int, std::string, int, int, int, std::string, char, double, std::string, bool);
 
 	std::string getNurseID();
+	std::string getSpecialty();
+	bool getPracticioner();
+
 
 	bool operator==(const Nurse& other) const; //overloading the == operator
 

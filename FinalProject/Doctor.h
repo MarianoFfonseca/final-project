@@ -19,7 +19,16 @@ public:
 	~Doctor(); //deconstructor
 
 	void addPatient(const Patient&); //adds patient to dynamic array of patients
+	
+	
 	std::string getDrID(); //getter
+	std::string getSpecialty();
+	std::string getDegree();
+	std::string getMedicalSchool();
+	int getCapacity();
+	bool getBoardCertifited();
+	int getNbPt();
+
 	
 	Patient* getArPatients(); //returns a pointer to the array of patients
 
@@ -49,10 +58,10 @@ private:
 	std::string medicalSchool_;
 	bool boardCertifited_;
 
-	int sizePTArray_;
+	int capacity_;
 	Patient* arPatients_;
 	int numPt_ = 0;
 	//NEEDS DYNAMIC ARRAY OF APPOINTMENTS ----- ADD TO CONSTRUCTOR
-	// int nbAppointments_;
+
 	Appointment** arAppointments_;
 };

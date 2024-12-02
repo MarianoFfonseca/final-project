@@ -28,6 +28,9 @@ std::string Nurse::getNurseID() { //returns nurseID
 	return nurseID_;
 }
 
+std::string Nurse::getSpecialty() { return specialty_; }
+bool Nurse::getPracticioner() { return practitioner_; }
+
 bool Nurse::operator== (const Nurse& other) const { //overloading the == operator
 	return nurseID_ == other.nurseID_;
 }

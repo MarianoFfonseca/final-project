@@ -6,6 +6,7 @@
 #include "Date.h"
 #include "Clinic.h"
 #include <string>
+
 using namespace std;
 int Doctor::drCount_ = 1; //used to make the ID for doctor
 
@@ -15,8 +16,8 @@ Doctor::Doctor() :Employee() { //default constructor
 	degree_ = "N/A";
 	medicalSchool_ = "N/A";
 	boardCertifited_ = 0;
-	sizePTArray_ = 0;
-	arPatients_ = new Patient[sizePTArray_];
+	capacity_ = 0;
+	arPatients_ = new Patient[capacity_];
 	// new Appointment * [5][8]
 	arAppointments_ = new Appointment * [5];
 
@@ -26,7 +27,7 @@ Doctor::Doctor() :Employee() { //default constructor
 	}
 }
 
-Doctor::Doctor(std::string fName, std::string lName, std::string stAddress, int zip, std::string city, int dayBirth, int monthBirth, int yearBirth, std::string sSN, char gender, double salary, std::string specialty, std::string degree, std::string medSchool, bool boardCert, int sizePTArray) :
+Doctor::Doctor(std::string fName, std::string lName, std::string stAddress, int zip, std::string city, int dayBirth, int monthBirth, int yearBirth, std::string sSN, char gender, double salary, std::string specialty, std::string degree, std::string medSchool, bool boardCert, int capacity) :
 	Employee(fName, lName, stAddress, zip, city, dayBirth, monthBirth, yearBirth, sSN, gender, salary) { //parameterized constructor
 
 	drID_ = drTitle_ + std::to_string(drCount_); //creates the string for the id
@@ -36,8 +37,8 @@ Doctor::Doctor(std::string fName, std::string lName, std::string stAddress, int 
 	medicalSchool_ = medSchool;
 	boardCertifited_ = boardCert;
 
-	sizePTArray_ = sizePTArray;
-	arPatients_ = new Patient[sizePTArray_]; //creates the dynamic array of patients
+	capacity_ = capacity;
+	arPatients_ = new Patient[capacity_]; //creates the dynamic array of patients
 
 	arAppointments_ = new Appointment * [5];
 
@@ -54,6 +55,12 @@ Doctor::~Doctor() { //deconstructor for dynamic arrays
 }
 
 std::string Doctor::getDrID() { return drID_; } //getter for drID
+std::string Doctor::getSpecialty() { return specialty_; }
+std::string Doctor::getDegree() { return degree_; }
+std::string Doctor::getMedicalSchool() { return medicalSchool_; }
+bool Doctor::getBoardCertifited() { return boardCertifited_; }
+int Doctor::getCapacity() { return capacity_; }
+int Doctor::getNbPt() { return numPt_; }
 
 void Doctor::addPatient(const Patient& patient) { // 
 	for (int i = 0; i < numPt_; i++) //checking if the patient is already in the array.
@@ -61,15 +68,15 @@ void Doctor::addPatient(const Patient& patient) { //
 			std::cout << "This patient is already assigned to this doctor." << std::endl;
 			return;
 		}
-	if (numPt_ == sizePTArray_) { //resizing the array if it is too small to add a new patient
-		int newSize = sizePTArray_ * 2;
+	if (numPt_ == capacity_) { //resizing the array if it is too small to add a new patient
+		int newSize = capacity_ * 2;
 		Patient* newAr = new Patient[newSize];
 		for (int i = 0; i < numPt_; i++) {
 			newAr[i] = arPatients_[i];
 		}
 		delete[] arPatients_; //deletes the old array
 		arPatients_ = newAr; //sets old array to new array
-		sizePTArray_ = newSize; //updates array size
+		capacity_ = newSize; //updates array size
 	}
 	arPatients_[numPt_] = patient; //assigns a new patient to the patient array
 	numPt_++; //increments the count of total assigned patients
@@ -96,9 +103,73 @@ void Doctor::addNurse(Clinic& clinic) {
 		clinic.sizeNurseAr_ = newSize; //updates array size
 	}
 
-	//adding nurse constructor -- THIS NEEDS TO DONE WITH LOOKS. 
-	Nurse arTest("test", "test", "test", 1234, "test", 1, 11, 1111, "test", 'G', 0000, "test", 1);
-	clinic.arNurses_[clinic.nbNurses_] = arTest;
+	string fName = "first";					//nurse objects
+	string lName = "name";
+	string stAddress = "123 lane av";
+	int	zipCode = 12345;
+	string city = "detroit";
+	int dayBirth = 1;
+	int monthBirth = 1;
+	int yearBirth = 1990;
+	string SSN = "12345677";
+	char gender = 'M';
+	double salary = 10000;
+	string specialty = "news";
+	char practCheck = 'y';
+	bool practitioner = true;
+
+	//cout << "Please enter the first name." << endl;
+	//cin >> fName;
+	//cout << "Please enter the last name." << endl;
+	//cin >> lName;
+
+	//cin.ignore(); //clears left over input to get the address string. 
+
+	//cout << "Please enter the street address." << endl;
+	//getline(cin, stAddress);
+
+	//cout << "Please enter the five digit zip code." << endl;
+	//cin >> zipCode;
+
+	//cout << "Please enter the city." << endl;
+	//cin >> city;
+
+	//cout << "Please enter the day of birth, between 1 and 31." << endl;
+	//cin >> dayBirth;
+
+	//cout << "Please enter the month of birth, between 1 and 12." << endl;
+	//cin >> monthBirth;
+
+	//cout << "Please enter the year of birth." << endl;
+	//cin >> yearBirth;
+
+	//cout << "Please enter the Social Security Number." << endl;
+	//cin >> SSN;
+
+	//cout << "Please enter 'M' or 'F' for gender." << endl;
+	//cin >> gender;
+
+	//cout << "Please enter the salary." << endl;
+	//cin >> salary;
+
+	//cout << "Please enter the specialty." << endl;
+	//cin >> specialty;
+
+	//cout << "Are they a nurse practictioner? Y/N" << endl;
+	//cin >> practCheck;
+
+	//if (practCheck == 'Y' || practCheck == 'y') {
+	//	practitioner = 1;
+	//}
+	//else
+	//	practitioner = 0;
+
+
+
+
+	//adding nurse constructor -- THIS NEEDS TO DONE WITH LOOPS. 
+	Nurse NewNurse(fName, lName, stAddress, zipCode, city, dayBirth, monthBirth, yearBirth, SSN, gender, salary, specialty, practitioner);
+	clinic.arNurses_[clinic.nbNurses_] = NewNurse;
 	clinic.nbNurses_++;
 
 	

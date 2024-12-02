@@ -5,6 +5,19 @@ public:
 	Person(); //Default Constructor
 
 	Person(std::string, std::string, std::string, int, std::string, int, int, int, std::string, char); //Paramertized Constructor
+	
+	//getters
+
+	std::string getFirstName();
+	std::string getLastName();
+	std::string getStreetAddress();
+	int	getZipCode();
+	std::string getCity();
+	int getDayBirth();
+	int getMonthBirth();
+	int getYearBirth();
+	std::string getSSN();
+	char getGender();
 
 protected:
 	std::string fName_;

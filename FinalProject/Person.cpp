@@ -18,3 +18,14 @@ Person::Person(std::string fName, std::string lName, std::string stAddress, int 
 	gender_ = gender;
 
 }
+
+std::string Person::getFirstName() { return fName_; }
+std::string Person::getLastName() { return lName_; }
+std::string Person::getStreetAddress() { return stAddress_; }
+int	Person::getZipCode() { return zipCode_; }
+std::string Person::getCity() { return city_; }
+int Person::getDayBirth() { return dayBirth_; }
+int Person::getMonthBirth() { return monthBirth_; }
+int Person::getYearBirth() { return yearBirth_; }
+std::string Person::getSSN() { return SSN_; }
+char Person::getGender() { return gender_; }
